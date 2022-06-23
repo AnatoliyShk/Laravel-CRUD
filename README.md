@@ -2,7 +2,7 @@
 
 
 ## Steps
-
+- make .env
 - docker-compose up
 #### In php-fpm container
 - composer install

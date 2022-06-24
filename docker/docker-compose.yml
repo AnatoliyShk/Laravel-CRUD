@@ -17,10 +17,6 @@ services:
       build:
           context: ./../
           dockerfile: ./docker/php-fpm/Dockerfile
-          args:
-              - PUID=1000
-              - PGID=1000
-              - INSTALL_XDEBUG=true
       environment:
           XDEBUG_CONFIG: remote_enable=1 remote_host=host.docker.internal profiler_enable=0
           PHP_IDE_CONFIG: "serverName=Docker"

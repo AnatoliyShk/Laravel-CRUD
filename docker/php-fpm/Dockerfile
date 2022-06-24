@@ -3,8 +3,7 @@ FROM php:8.1.0-fpm-alpine
 # Install packages
 RUN apk add --no-cache curl git build-base zlib-dev oniguruma-dev autoconf bash
 
-# Xdebug
-pecl install xdebug && docker-php-ext-enable xdebug; \
+RUN pecl install xdebug && docker-php-ext-enable xdebug;
 
 COPY ./docker/php-fpm/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 

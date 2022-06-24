@@ -22,9 +22,9 @@ class Post extends Model
 
 
 
-    public function getPosts(): \Illuminate\Pagination\CursorPaginator
+    public function getPosts()
     {
-        return $this->orderBy('id', 'desc')->cursorPaginate(15);
+        return $this->orderBy('updated_at', 'desc')->paginate(3);
     }
 
 }

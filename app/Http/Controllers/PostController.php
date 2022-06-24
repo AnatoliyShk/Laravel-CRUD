@@ -31,7 +31,10 @@ class PostController extends Controller
 
     public function index()
     {
-        return view('post-index', ['posts' => $this->post->getPosts()]);
+        $posts = $this->post->getPosts();
+        return view('post-index', [
+            'posts' => $posts,
+        ]);
     }
 
     public function store(StoreRequest $request): RedirectResponse

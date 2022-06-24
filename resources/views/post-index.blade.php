@@ -20,7 +20,8 @@
         </div>
         <div class="row clearfix">
             <div class="col-lg-8 col-md-12 left-box">
-                @foreach($posts as $post)
+                {!! $posts->withQueryString()->links() !!}
+                @foreach($posts as $key => $post)
                     <div class="card single_post">
                         <div class="body">
                             <div class="img-post">
@@ -46,6 +47,7 @@
                     </div>
                 @endforeach
             </div>
+            {!! $posts->withQueryString()->links() !!}
         </div>
     </div>
 </div>

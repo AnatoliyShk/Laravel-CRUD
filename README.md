@@ -7,6 +7,7 @@
 #### In php-fpm container
 - composer install
 - php artisan migrate
+- php artisan storage:link
 #### In browser
 - Go to http://localhost:888/
 #### If problem with front

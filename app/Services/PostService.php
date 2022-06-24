@@ -30,4 +30,17 @@ class PostService
         }
         return null;
     }
+
+    public function provideFormRequest(FormRequest $request, Post $post): Post
+    {
+        $requestInfo = $request->validated();
+        $updateInfo = [
+            'title' => $requestInfo['title'] ?: "",
+            'description' => $requestInfo['description'] ?: ""
+        ];
+        if($post !== null) {
+            $post->update($updateInfo);
+        }
+        return $post;
+    }
 }

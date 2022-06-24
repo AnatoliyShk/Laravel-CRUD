@@ -61,6 +61,10 @@ class PostController extends Controller
 
     public function destroy(DestroyRequest $destroyRequest, Post $post): RedirectResponse
     {
+        $notification = [
+            'status' => 'error',
+            'message' => 'Something went wrong'
+        ];
         try {
             $post->delete();
             $notification = [
@@ -69,10 +73,6 @@ class PostController extends Controller
             ];
         } catch (\Exception $exception) {
             $this->logger->error($exception->getMessage());
-            $notification = [
-                'status' => 'error',
-                'message' => 'Something went wrong'
-            ];
         }
         return redirect()->route('posts.index')->with($notification);
     }
@@ -105,22 +105,19 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post): RedirectResponse
     {
+        $notification = [
+            'status' => 'error',
+            'message' => 'Something went wrong'
+        ];
         try {
             $updateInfo = $this->postService->provideFormRequest($request);
-            if ($updateInfo['isImageUpdate'] && $post->image) {
-                Storage::delete('public/' . $post->image);
-            }
-            $post->update($updateInfo);
+//            Storage::delete('public/' . $post->image);
             $notification = [
                 'status' => 'success',
                 'message' => 'Post update success'
             ];
         } catch (\Exception $exception) {
             $this->logger->error($exception->getMessage());
-            $notification = [
-                'status' => 'error',
-                'message' => 'Something went wrong'
-            ];
         }
 
         return redirect()->route('posts.index')->with($notification);

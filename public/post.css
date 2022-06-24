@@ -35,7 +35,9 @@ body{
     font-size: 22px;
     padding: 28px;
 }
-
+.twitter-share-button {
+    margin-top: 10px;
+}
 .img-post img{
     max-height: 300px;
     border-radius: 4px;

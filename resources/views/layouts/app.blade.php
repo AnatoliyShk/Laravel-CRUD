@@ -38,6 +38,9 @@
 
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/post.css">
+
     <script>
         $(document).ready(function () {
             tinymce.init({

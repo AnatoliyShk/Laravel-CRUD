@@ -1,5 +1,5 @@
 body{
-    background-color: #f4f7f6;
+    background-color: #b8bcc4;
     margin-top:20px;
 }
 .card {
@@ -40,6 +40,13 @@ body{
 }
 .img-post img{
     max-height: 300px;
-    border-radius: 4px;
+    border-radius: 14px;
 }
 
+.img-fluid {
+    margin-top: 10px;
+}
+
+.row .img-fluid {
+    border-radius: 30px;
+}

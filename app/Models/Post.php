@@ -33,6 +33,6 @@ class Post extends Model
 
     public function getShortDescriptionAttribute()
     {
-        return mb_substr($this->description, 0, 30);
+        return mb_substr($this->description, 0, 25);
     }
 }

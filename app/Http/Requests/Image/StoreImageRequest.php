@@ -13,7 +13,7 @@ class StoreImageRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->route('image')->post->user->id === auth()->id();
     }
 
     /**

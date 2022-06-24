@@ -31,7 +31,7 @@ class PostService
         return null;
     }
 
-    public function provideFormRequest(FormRequest $request, Post $post): Post
+    public function update(FormRequest $request, Post $post): Post
     {
         $requestInfo = $request->validated();
         $updateInfo = [
@@ -40,6 +40,7 @@ class PostService
         ];
         if($post !== null) {
             $post->update($updateInfo);
+            $this->imageService->create($request, $post);
         }
         return $post;
     }

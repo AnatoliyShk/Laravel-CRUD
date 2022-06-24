@@ -31,4 +31,8 @@ class Post extends Model
         return $this->orderBy('updated_at', 'desc')->paginate(3);
     }
 
+    public function getShortDescriptionAttribute()
+    {
+        return mb_substr($this->description, 0, 30);
+    }
 }

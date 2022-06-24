@@ -12,14 +12,14 @@ class ImageService
 {
     public function create(FormRequest $request, ?Post $relatedModel = null): ?Collection {
         if (($files = $request->file('image')) && $relatedModel !== null) {
-            foreach ($files as $file) {
+            foreach ($files as $key => $file) {
                 $filename = (new \DateTime())->format('Y-m-d h:i:s');
                 $isCreated = $file->storeAs(
                     'public',
-                    $filename
+                    $key.$filename
                 );
                 if ($isCreated) {
-                    $relatedModel->images()->create(['title' => $filename]);
+                    $relatedModel->images()->create(['title' => $key.$filename]);
                 }
             }
         }

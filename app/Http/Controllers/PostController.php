@@ -37,6 +37,12 @@ class PostController extends Controller
         ]);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\StoreRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(StoreRequest $request): RedirectResponse
     {
         $notification = [
@@ -77,9 +83,9 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with($notification);
     }
 
-    public function show(Post $article): PostResource
+    public function show(Post $post)
     {
-        return $this->postResponse($article);
+        return view('post', ['post' => $post]);
     }
 
     /**
@@ -110,7 +116,7 @@ class PostController extends Controller
             'message' => 'Something went wrong'
         ];
         try {
-            $updateInfo = $this->postService->provideFormRequest($request);
+            $updateInfo = $this->postService->update($request, $post);
 //            Storage::delete('public/' . $post->image);
             $notification = [
                 'status' => 'success',

@@ -2,29 +2,32 @@
 
 namespace App\Services;
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Database\Eloquent\Model;
 
 class PostService
 {
-    public function provideFormRequest(FormRequest $request): array
+    private $imageService;
+
+    public function __construct(ImageService $imageService) {
+        $this->imageService = $imageService;
+    }
+
+    public function create(FormRequest $request, ?User $relatedModel = null): ?Post
     {
         $requestInfo = $request->validated();
         $postInfo = [
             'title' => $requestInfo['title'] ?: "",
-            'description' => $requestInfo['description'] ?: "",
-            'isImageUpdate' => false
+            'description' => $requestInfo['description'] ?: ""
         ];
-        if ($file = $request->file('image')) {
-            $filename = (new \DateTime())->format('Y-m-d h:i:s');
-            $isCreated = $file->storeAs(
-                'public',
-                $filename
-            );
-            if($isCreated === true || is_string($isCreated)) {
-                $postInfo['isImageUpdate'] = true;
+        if($relatedModel !== null) {
+            if($post = $relatedModel->posts()->create($postInfo)) {
+                $this->imageService->create($request, $post);
             }
-            $postInfo['image'] = $filename;
+            return $post;
         }
-        return $postInfo;
+        return null;
     }
 }

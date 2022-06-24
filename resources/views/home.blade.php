@@ -34,7 +34,7 @@
                         <input class="mb-4 form-control" type="text" name="title" placeholder="Enter title to your post">
                         <textarea id="mytextarea" name="description" placeholder="Hello, this is my post"></textarea>
                         <div class="actions text-end pt-3">
-                            <input type="file" class="my-pond" name="image" accept="image/png, image/jpeg, image/jpg"/>
+                            <input type="file" class="my-pond" name="image[]" accept="image/png, image/jpeg, image/jpg" multiple/>
                             <input class="btn btn-success" type="submit" value="create">
                         </div>
                     </form>

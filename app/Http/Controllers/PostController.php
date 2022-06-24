@@ -39,26 +39,22 @@ class PostController extends Controller
 
     public function store(StoreRequest $request): RedirectResponse
     {
+        $notification = [
+            'status' => 'error',
+            'message' => 'Something went wrong'
+        ];
         if($user = auth()->user()) {
             try {
-                $createInfo = $this->postService->provideFormRequest($request);
-                $user->posts()->create($createInfo);
-                $notification = [
-                    'status' => 'success',
-                    'message' => 'Data success stored'
-                ];
+                $post = $this->postService->create($request, $user);
+                if($post !== null) {
+                    $notification = [
+                        'status' => 'success',
+                        'message' => 'Data success stored'
+                    ];
+                }
             } catch (\Exception $exception) {
                 $this->logger->error($exception->getMessage());
-                $notification = [
-                    'status' => 'error',
-                    'message' => 'Something went wrong'
-                ];
             }
-        } else {
-            $notification = [
-                'status' => 'error',
-                'message' => 'Something went wrong'
-            ];
         }
         return redirect()->route('home')->with($notification);
     }
@@ -66,7 +62,6 @@ class PostController extends Controller
     public function destroy(DestroyRequest $destroyRequest, Post $post): RedirectResponse
     {
         try {
-            $destroyRequest->validated();
             $post->delete();
             $notification = [
                 'status' => 'success',

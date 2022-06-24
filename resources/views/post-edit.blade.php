@@ -33,7 +33,7 @@
                                         <textarea id="mytextarea" name="description" placeholder="Hello, this is my post">{{$post->description}}</textarea>
                                     </div>
                                     <div class="actions text-end pt-5">
-                                        <input type="file" class="my-pond" name="image" accept="image/png, image/jpeg, image/jpg"/>
+                                        <input type="file" class="my-pond" name="image" accept="image/png, image/jpeg, image/jpg" multiple>
                                         <input class="btn btn-success" type="submit" value="update">
                                     </div>
                                 </div>

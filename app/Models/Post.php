@@ -22,16 +22,9 @@ class Post extends Model
 
 
 
-    public function getPosts(): Collection
+    public function getPosts(): \Illuminate\Pagination\CursorPaginator
     {
-        return $this->paginate($this->with(['user'])->latest()->get())->getCollection();
-    }
-
-    public function paginate($items, $perPage = 5, $page = null, $options = [])
-    {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items = $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+        return $this->orderBy('id', 'desc')->cursorPaginate(15);
     }
 
 }

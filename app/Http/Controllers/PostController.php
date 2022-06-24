@@ -92,7 +92,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('post-edit', ['post' => $post]);
+        if($user = auth()->user()) {
+            return view('post-edit', ['post' => $post]);
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**

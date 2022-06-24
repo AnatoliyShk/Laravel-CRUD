@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="row pt-3">
                                         <label>Description</label>
-                                        <textarea id="mytextarea" name="description" >{{$post->description}}</textarea>
+                                        <textarea id="description" name="description" >{{$post->description}}</textarea>
                                     </div>
                                     <div class="actions text-end pt-5">
                                         <input type="file" name="image" accept="image/png, image/jpeg">
@@ -37,5 +37,9 @@
             </div>
         </div>
     </div>
-
+    <script>
+        tinymce.init({
+            selector: 'description'
+        });
+    </script>
 @endsection

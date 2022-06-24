@@ -17,7 +17,7 @@
                                 <div class="footer">
                                     <div class="row pt-3">
                                         <label>Title</label>
-                                        <input type="text" name="title" value="{{$post->title}}">
+                                        <input class="form-control" type="text" name="title" value="{{$post->title}}">
                                     </div>
                                     <div class="row pt-3">
                                         <label>Description</label>

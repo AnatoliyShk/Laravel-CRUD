@@ -26,7 +26,7 @@
                             <div class="img-post">
                                 <img class="d-block img-fluid w-100" src="{{ asset("storage/".$post->image) }}">
                             </div>
-                            <h3><{{ $post->title }}</h3>
+                            <h3>{{ $post->title }}</h3>
                             <h4>Created by {{ $post->user['name'] }}</h4>
                             <p class="post_date">{{$post->created_at }}</p>
                             <p>{!! $post->description !!}</p>

@@ -51,6 +51,21 @@
             });
         });
     </script>
+
+    <script>
+        $(function(){
+
+            FilePond.registerPlugin(FilePondPluginFileValidateType);
+            // Turn input element into a pond
+            $('.my-pond').filepond();
+
+            // Set allowMultiple property to true
+            $('.my-pond').filepond('allowMultiple', true);
+            $('.my-pond').filepond('storeAsFile', true);
+            $('.my-pond').filepond('checkValidity', true);
+
+        });
+    </script>
 </head>
 <body>
     <div id="app">

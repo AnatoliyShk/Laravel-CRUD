@@ -11,7 +11,8 @@ class PostService
         $requestInfo = $request->validated();
         $postInfo = [
             'title' => $requestInfo['title'] ?: "",
-            'description' => $requestInfo['description'] ?: ""
+            'description' => $requestInfo['description'] ?: "",
+            'isImageUpdate' => false
         ];
         if ($file = $request->file('image')) {
             $filename = (new \DateTime())->format('Y-m-d h:i:s');

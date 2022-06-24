@@ -1,20 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <script>
-        $(function(){
-
-            FilePond.registerPlugin(FilePondPluginFileValidateType);
-            // Turn input element into a pond
-            $('.my-pond').filepond();
-
-            // Set allowMultiple property to true
-            $('.my-pond').filepond('allowMultiple', true);
-            $('.my-pond').filepond('storeAsFile', true);
-            $('.my-pond').filepond('checkValidity', true);
-
-        });
-    </script>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -57,10 +43,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    tinymce.init({
-        selector: '#mytextarea'
-    });
-</script>
 @endsection

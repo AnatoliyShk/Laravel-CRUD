@@ -19,6 +19,11 @@
             @endif
         </div>
         <div class="row clearfix">
+            @if (count($posts) < 1)
+                <a href="{{ route('home') }}" id="first_post" class="btn btn-success text-white mt-5">
+                    Create post your first post
+                </a>
+            @endif
             <div class="col-lg-8 col-md-12 left-box">
                 {!! $posts->withQueryString()->links() !!}
                 @foreach($posts as $key => $post)

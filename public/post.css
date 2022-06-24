@@ -31,7 +31,13 @@ body{
     font-size: 14px;
 }
 
+#first_post {
+    font-size: 22px;
+    padding: 28px;
+}
+
 .img-post img{
     max-height: 300px;
     border-radius: 4px;
 }
+

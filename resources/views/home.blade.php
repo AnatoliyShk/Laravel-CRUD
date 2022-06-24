@@ -1,7 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        $(function(){
+
+            FilePond.registerPlugin(FilePondPluginFileValidateType);
+            // Turn input element into a pond
+            $('.my-pond').filepond();
+
+            // Set allowMultiple property to true
+            $('.my-pond').filepond('allowMultiple', true);
+            $('.my-pond').filepond('storeAsFile', true);
+            $('.my-pond').filepond('checkValidity', true);
+
+        });
+    </script>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -32,10 +45,10 @@
                     @endif
                     <form method="post" action="{{ route('posts.store') }}" class="post-form" enctype="multipart/form-data">
                         @csrf
-                        <input class="mb-4" type="text" name="title" placeholder="Enter title to your post">
+                        <input class="mb-4 form-control" type="text" name="title" placeholder="Enter title to your post">
                         <textarea id="mytextarea" name="description" placeholder="Hello, this is my post"></textarea>
                         <div class="actions text-end pt-3">
-                            <input type="file" name="image" accept="image/png, image/jpeg">
+                            <input type="file" class="my-pond" name="image" accept="image/png, image/jpeg, image/jpg"/>
                             <input class="btn btn-success" type="submit" value="create">
                         </div>
                     </form>

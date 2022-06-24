@@ -18,8 +18,7 @@ class StoreRequest extends FormRequest
             'title' => 'required',
             'description' => 'required',
             'image' => [
-                'required',
-                new Filename('/^[a-z0-9-_]+$/'), // This is your custom rule
+                'required'
             ],
         ];
     }

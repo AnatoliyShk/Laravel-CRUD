@@ -3,7 +3,6 @@
 
 namespace App\Services;
 
-use App\Models\Image;
 use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Database\Eloquent\Collection;

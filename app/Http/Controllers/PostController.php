@@ -116,8 +116,7 @@ class PostController extends Controller
             'message' => 'Something went wrong'
         ];
         try {
-            $updateInfo = $this->postService->update($request, $post);
-//            Storage::delete('public/' . $post->image);
+            $post = $this->postService->update($request, $post);
             $notification = [
                 'status' => 'success',
                 'message' => 'Post update success'

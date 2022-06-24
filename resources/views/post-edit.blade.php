@@ -7,6 +7,15 @@
                 <div class="col-lg-8 col-md-12 left-box">
                     <div class="card single_post">
                         <div class="card-body">
+                            @if($errors->any())
+                                <div class="alert alert-danger" role="alert">
+                                    <ul class="list-unstyled">
+                                        @foreach($errors->all() as $error)
+                                            <li> {{ $error }} </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <a class="btn btn-close" href="{{ route('posts.index') }}"></a>
                             <div class="img-post">
                                 <img class="d-block img-fluid w-100" src="{{ asset("storage/".$post->image) }}">

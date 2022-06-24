@@ -14,11 +14,14 @@ class PostService
             'description' => $requestInfo['description'] ?: ""
         ];
         if ($file = $request->file('image')) {
-            $filename = (new \DateTime())->format('Y-m-d');
-            $file->storeAs(
+            $filename = (new \DateTime())->format('Y-m-d h:i:s');
+            $isCreated = $file->storeAs(
                 'public',
                 $filename
             );
+            if($isCreated === true || is_string($isCreated)) {
+                $postInfo['isImageUpdate'] = true;
+            }
             $postInfo['image'] = $filename;
         }
         return $postInfo;

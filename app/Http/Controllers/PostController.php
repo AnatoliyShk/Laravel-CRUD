@@ -10,15 +10,16 @@ use App\Models\Post;
 use App\Models\User;
 use App\Services\PostService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Psr\Log\LoggerInterface;
 
 class PostController extends Controller
 {
 
-    protected $postService;
-    protected $post;
-    protected $user;
-    protected $logger;
+    protected PostService $postService;
+    protected Post $post;
+    protected User $user;
+    protected LoggerInterface $logger;
 
     public function __construct(Post $post, User $user, PostService $postService, LoggerInterface $logger)
     {
@@ -98,17 +99,30 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Post\UpdatePostRequest  $request
-     * @param  \App\Models\Post  $image
-     * @return PostResource
+     * @param  \App\Models\Post  $post
+     * @return RedirectResponse
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post): RedirectResponse
     {
-        if($user = auth()->user()) {
+        try {
             $updateInfo = $this->postService->provideFormRequest($request);
+            if ($updateInfo['isImageUpdate'] && $post->image) {
+                Storage::delete('public/' . $post->image);
+            }
             $post->update($updateInfo);
+            $notification = [
+                'status' => 'success',
+                'message' => 'Post update success'
+            ];
+        } catch (\Exception $exception) {
+            $this->logger->error($exception->getMessage());
+            $notification = [
+                'status' => 'error',
+                'message' => 'Something went wrong'
+            ];
         }
 
-        return $this->postResponse($post);
+        return redirect()->route('posts.index')->with($notification);
     }
 
     protected function postResponse(Post $post): PostResource

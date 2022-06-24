@@ -94,9 +94,8 @@ class PostController extends Controller
     {
         if($user = auth()->user()) {
             return view('post-edit', ['post' => $post]);
-        } else {
-            return view('auth.login');
         }
+        return view('auth.login');
     }
 
     /**

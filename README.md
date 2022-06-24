@@ -3,7 +3,7 @@
 
 ## Steps
 - make .env
-- docker-compose up
+- docker-compose up --build
 #### In php-fpm container
 - composer install
 - php artisan migrate

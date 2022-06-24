@@ -7,7 +7,7 @@
                 <div class="col-lg-8 col-md-12 left-box">
                     <div class="card single_post">
                         <div class="card-body">
-                            <a class="btn btn-close" href="{{ route('home') }}"></a>
+                            <a class="btn btn-close" href="{{ route('posts.index') }}"></a>
                             <div class="img-post">
                                 <img class="d-block img-fluid w-100" src="{{ asset("storage/".$post->image) }}">
                             </div>

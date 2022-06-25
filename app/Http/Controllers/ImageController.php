@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\DeleteEntityException;
 use App\Http\Requests\Image\DestroyRequest;
 use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\UpdateImageRequest;
@@ -98,27 +99,21 @@ class ImageController extends Controller
      */
     public function destroy(DestroyRequest $request, Image $image)
     {
-        $notification = [
-            'status' => 'error',
-            'message' => 'Something went wrong'
-        ];
-        if(count($image->post->images()->get()) < 2) {
-            $notification = [
-                'status' => 'error',
-                'message' => 'Your post must contain at least 1 image'
-            ];
-        } else {
-            try {
-                $image->delete();
-                Storage::delete('public/' . $image->title);
-                $notification = [
-                    'status' => 'success',
-                    'message' => 'Image success deleted'
-                ];
-            } catch (\Exception $exception) {
-                $this->logger->error($exception->getMessage());
+        try {
+            if(count($image->post->images()->get()) < 2) {
+                throw new DeleteEntityException('Your post must contain at least 1 image');
             }
+            $image->delete();
+            Storage::delete('public/' . $image->title);
+            if($image !== null) {
+                throw new DeleteEntityException();
+            }
+        } catch (\Exception $exception) {
+            $exception->report();
+            return back()->withErrors($exception->getMessage())->withInput();
         }
-        return redirect()->route('posts.edit', ['post' => $image->post->id])->with($notification);
+        return redirect()->route('posts.edit', ['post' => $image->post->id])->with([
+            'message' => 'Image success deleted'
+        ]);
     }
 }

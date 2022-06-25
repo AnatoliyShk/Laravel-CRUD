@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CreateEntityException;
+use App\Exceptions\DeleteEntityException;
+use App\Exceptions\UpdateEntityException;
 use App\Http\Requests\Post\DestroyRequest;
 use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
@@ -12,19 +15,18 @@ use App\Services\PostService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Psr\Log\LoggerInterface;
+use Illuminate\Support\MessageBag;
 
 class PostController extends Controller
 {
 
-    protected PostService $postService;
-    protected User $user;
-    protected LoggerInterface $logger;
+    protected $postService;
+    protected $user;
 
-    public function __construct(User $user, PostService $postService, LoggerInterface $logger)
+    public function __construct(User $user, PostService $postService)
     {
         $this->postService = $postService;
         $this->user = $user;
-        $this->logger = $logger;
     }
 
     public function index()
@@ -43,42 +45,33 @@ class PostController extends Controller
      */
     public function store(StoreRequest $request): RedirectResponse
     {
-        $notification = [
-            'status' => 'error',
-            'message' => 'Something went wrong'
-        ];
         if($user = auth()->user()) {
             try {
                 $post = $this->postService->create($request, $user);
-                if($post !== null) {
-                    $notification = [
-                        'status' => 'success',
-                        'message' => 'Data success stored'
-                    ];
+                if($post === null) {
+                    throw new CreateEntityException();
                 }
             } catch (\Exception $exception) {
-                $this->logger->error($exception->getMessage());
+                $exception->report();
+                return back()->withErrors($exception->getMessage())->withInput();
             }
         }
-        return redirect()->route('home')->with($notification);
+        return redirect()->route('home')->with([
+            'message' => 'Data success stored'
+        ]);
     }
 
     public function destroy(DestroyRequest $destroyRequest, Post $post): RedirectResponse
     {
-        $notification = [
-            'status' => 'error',
-            'message' => 'Something went wrong'
-        ];
         try {
             $post->delete();
-            $notification = [
-                'status' => 'success',
-                'message' => 'Post success deleted'
-            ];
         } catch (\Exception $exception) {
-            $this->logger->error($exception->getMessage());
+            $exception->report();
+            return back()->withErrors($exception->getMessage())->withInput();
         }
-        return redirect()->route('posts.index')->with($notification);
+        return redirect()->route('posts.index')->with([
+            'message' => 'Post success deleted'
+        ]);
     }
 
     public function show(Post $post)
@@ -109,21 +102,19 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post): RedirectResponse
     {
-        $notification = [
-            'status' => 'error',
-            'message' => 'Something went wrong'
-        ];
         try {
             $post = $this->postService->update($request, $post);
-            $notification = [
-                'status' => 'success',
-                'message' => 'Post update success'
-            ];
+            if($post === null) {
+                throw new UpdateEntityException();
+            }
         } catch (\Exception $exception) {
-            $this->logger->error($exception->getMessage());
+            $exception->report();
+            return back()->withErrors($exception->getMessage())->withInput();
         }
 
-        return redirect()->route('posts.index')->with($notification);
+        return redirect()->route('posts.index')->with([
+            'message' => 'Post update success'
+        ]);
     }
 
     protected function postResponse(Post $post): PostResource

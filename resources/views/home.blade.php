@@ -9,16 +9,10 @@
                 <div class="card-header">{{ __('Create post') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        @if (session('status') === 'error')
-                            <div class="alert alert-danger" role="alert">
-                                {{ session('message') }}
-                            </div>
-                        @elseif (session('status') === 'success')
-                            <div class="alert alert-success" role="alert">
-                                {{ session('message') }}
-                            </div>
-                        @endif
+                    @if (session('message'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('message') }}
+                        </div>
                     @endif
                     @if($errors->any())
                         <div class="alert alert-danger" role="alert">

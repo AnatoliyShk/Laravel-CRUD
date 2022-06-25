@@ -18,6 +18,12 @@ class PostService
         $this->postRepository = $postRepository;
     }
 
+    public function get(int $id)
+    {
+        return $this->postRepository->get($id);
+    }
+
+
     public function getItems()
     {
         return $this->postRepository->getItems();

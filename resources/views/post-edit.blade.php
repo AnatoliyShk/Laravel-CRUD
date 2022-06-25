@@ -7,16 +7,10 @@
                 <div class="col-lg-8 col-md-12 left-box">
                     <div class="card single_post">
                         <div class="card-body">
-                            @if (session('status'))
-                                @if (session('status') === 'error')
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ session('message') }}
-                                    </div>
-                                @elseif (session('status') === 'success')
-                                    <div class="alert alert-success" role="alert">
-                                        {{ session('message') }}
-                                    </div>
-                                @endif
+                            @if (session('message'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('message') }}
+                                </div>
                             @endif
                             @if($errors->any())
                                 <div class="alert alert-danger" role="alert">

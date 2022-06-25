@@ -48,9 +48,11 @@
                             <h3>{{ $post->title }}</h3>
                             <h4>Created by {{ $post->user->name }}</h4>
                             <p class="post_date">{{$post->created_at }}</p>
-                            <p>{!! $post->short_description !!}...</p>
+                            <p>{!! $post->short_description !!} ...</p>
                             <a href="{{ route('posts.show', [$post->id]) }}" type="submit" id="read-btn" class="btn btn-success d-block">Read</a>
-                            <a class="twitter-share-button d-block mt-5 text-end" href="https://twitter.com/intent/tweet?text={{ $post->title }}">Tweet</a>
+                            <div>
+                                <a class="twitter-share-button d-block mt-5 text-end" href="https://twitter.com/intent/tweet?text={{ $post->title }}">Tweet</a>
+                            </div>
                         </div>
                     </div>
                 @endforeach

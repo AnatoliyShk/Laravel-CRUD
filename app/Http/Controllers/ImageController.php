@@ -15,14 +15,12 @@ class ImageController extends Controller
 {
 
     protected ImageService $postService;
-    protected Image $image;
     protected User $user;
     protected LoggerInterface $logger;
 
-    public function __construct(Image $image, User $user, ImageService $imageService, LoggerInterface $logger)
+    public function __construct(User $user, ImageService $imageService, LoggerInterface $logger)
     {
         $this->postService = $imageService;
-        $this->image = $image;
         $this->user = $user;
         $this->logger = $logger;
     }

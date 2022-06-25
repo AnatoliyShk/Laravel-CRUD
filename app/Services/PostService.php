@@ -4,15 +4,23 @@ namespace App\Services;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Repositories\PostRepository;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Database\Eloquent\Model;
 
 class PostService
 {
     private $imageService;
+    private $postRepository;
 
-    public function __construct(ImageService $imageService) {
+    public function __construct(PostRepository $postRepository, ImageService $imageService) {
         $this->imageService = $imageService;
+        $this->postRepository = $postRepository;
+    }
+
+    public function getItems()
+    {
+        return $this->postRepository->getItems();
     }
 
     public function create(FormRequest $request, ?User $relatedModel = null): ?Post

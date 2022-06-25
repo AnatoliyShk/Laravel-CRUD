@@ -17,21 +17,19 @@ class PostController extends Controller
 {
 
     protected PostService $postService;
-    protected Post $post;
     protected User $user;
     protected LoggerInterface $logger;
 
-    public function __construct(Post $post, User $user, PostService $postService, LoggerInterface $logger)
+    public function __construct(User $user, PostService $postService, LoggerInterface $logger)
     {
         $this->postService = $postService;
-        $this->post = $post;
         $this->user = $user;
         $this->logger = $logger;
     }
 
     public function index()
     {
-        $posts = $this->post->getPosts();
+        $posts = $this->postService->getItems();
         return view('post-index', [
             'posts' => $posts,
         ]);

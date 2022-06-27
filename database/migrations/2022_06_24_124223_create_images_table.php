@@ -14,7 +14,10 @@ class CreateImagesTable extends Migration
      */
     public function up()
     {
-        DB::table('posts')->truncate();
+        $posts = Post::get();
+        foreach ($posts as $post) {
+            $post->delete();
+        }
     }
 
     /**

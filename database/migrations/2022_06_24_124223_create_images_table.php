@@ -14,8 +14,8 @@ class CreateImagesTable extends Migration
      */
     public function up()
     {
-        Image::query()->truncate();
-        Post::query()->truncate();
+        DB::table('image')->truncate();
+        DB::table('post')->truncate();
     }
 
     /**

@@ -52,7 +52,7 @@ class PostController extends Controller
                     throw new CreateEntityException();
                 }
             } catch (\Exception $exception) {
-                $exception->report();
+//                $exception->report();
                 return back()->withErrors($exception->getMessage())->withInput();
             }
         }

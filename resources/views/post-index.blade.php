@@ -45,7 +45,7 @@
                             @endif
                             <div class="row">
                                 @if(isset($post->images[0]))
-                                    <img class="d-block img-fluid w-100" src="{{ asset("storage/".$post->images[0]->title) }}">
+                                    <img class="d-block img-fluid w-100" src="{{ $post->images[0]->getCloudUrl()}}">
                                 @endif
                             </div>
                             <h3>{{ $post->title }}</h3>

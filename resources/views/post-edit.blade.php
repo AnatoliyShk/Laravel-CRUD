@@ -25,7 +25,7 @@
                             <div class="img-post d-flex">
                                 @foreach($post->images as $key => $image)
                                     <div class="w-25 m-2 text-end">
-                                        <img class="d-flex img-fluid w-100" src="{{ asset("storage/".$image->title) }}">
+                                        <img class="d-flex img-fluid w-100" src="{{ $image->getCloudUrl() }}">
                                         <form method="post" action="/images/{{ $image->id }}" enctype="multipart/form-data">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete" />

@@ -15,6 +15,7 @@ class ImageService
 
     public function __construct(ImageRepository $imageRepository) {
         $this->imageRepository = $imageRepository;
+        App::make('files')->link(storage_path('app/public'), public_path('storage'));
     }
 
     public function create(FormRequest $request, ?Post $relatedModel = null): ?Collection {

@@ -105,9 +105,6 @@ class ImageController extends Controller
             }
             $image->delete();
 //            Storage::delete('public/' . $image->title);
-            if($image !== null) {
-                throw new DeleteEntityException();
-            }
         } catch (\Exception $exception) {
             $exception->report();
             return back()->withErrors($exception->getMessage())->withInput();

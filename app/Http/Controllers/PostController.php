@@ -66,7 +66,7 @@ class PostController extends Controller
         try {
             $post->delete();
         } catch (\Exception $exception) {
-            $exception->report();
+//            $exception->report();
             return back()->withErrors($exception->getMessage())->withInput();
         }
         return redirect()->route('posts.index')->with([
@@ -108,7 +108,7 @@ class PostController extends Controller
                 throw new UpdateEntityException();
             }
         } catch (\Exception $exception) {
-            $exception->report();
+//            $exception->report();
             return back()->withErrors($exception->getMessage())->withInput();
         }
 

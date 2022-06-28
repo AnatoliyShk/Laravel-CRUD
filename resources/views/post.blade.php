@@ -13,11 +13,11 @@
                                 <div class="w-100 m-2 text-end">
                                     <img class="d-flex img-fluid w-100" src="{{ $post->images[0]->getCloudUrl() }}">
                                 </div>
-                                <div class="m-2 text-end" style="max-height: 600px; @if(count($post->images) > 4) overflow-y: scroll @endif">
+                                <div class="m-2 text-end" style="height: 300px; @if(count($post->images) > 3) overflow-y: scroll @endif">
                                     @foreach($post->images as $key => $image)
                                         @if($key > 0)
                                             <div>
-                                                <img class="d-flex img-fluid w-50" src="{{ $image->getCloudUrl() }}">
+                                                <img class="d-flex img-fluid w-75" src="{{ $image->getCloudUrl() }}">
                                             </div>
                                         @endif
                                     @endforeach

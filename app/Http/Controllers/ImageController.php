@@ -104,7 +104,7 @@ class ImageController extends Controller
                 throw new DeleteEntityException('Your post must contain at least 1 image');
             }
             $image->delete();
-            Storage::delete('public/' . $image->title);
+//            Storage::delete('public/' . $image->title);
             if($image !== null) {
                 throw new DeleteEntityException();
             }

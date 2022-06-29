@@ -70,7 +70,7 @@
             $('.my-pond').filepond('allowMultiple', true);
             $('.my-pond').filepond('storeAsFile', true);
             $('.my-pond').filepond('checkValidity', true);
-            $('.my-pond').filepond('maxFileSize', "3MB");
+            $('.my-pond').filepond('maxFileSize', "5MB");
 
         });
     </script>

@@ -48,7 +48,7 @@ class ArraySize implements Rule
             $total += $file->getSize();
         }
 
-        return ($total / 1024) > $this->size;
+        return ($total / 1024) < $this->size;
     }
 
     /**

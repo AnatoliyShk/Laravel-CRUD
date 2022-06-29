@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Post;
 
+use App\Rules\ArraySize;
 use App\Rules\Filename;
 use Illuminate\Foundation\Http\FormRequest;
 

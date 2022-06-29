@@ -28,7 +28,7 @@ class StoreRequest extends FormRequest
             'title.required' => 'Post title is required',
             'description.required' => 'Post description is required',
             'image.required' => 'Post image is required',
-            'image.uploaded' => 'Post image is too big'
+            'image.max' => 'Post image is too big'
         ];
     }
 }

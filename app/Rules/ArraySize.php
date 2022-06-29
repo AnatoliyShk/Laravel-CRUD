@@ -36,6 +36,10 @@ class ArraySize implements Rule
             return false;
         }
 
+        if(count($value) < 1) {
+            return false;
+        }
+
         foreach ($value as $file) {
             if (!$file instanceof UploadedFile) {
                 // not a file, fail it

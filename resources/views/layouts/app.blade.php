@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/filepond/4.30.4/filepond.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <!-- include FilePond library -->
+    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
     <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
 
@@ -60,6 +61,7 @@
     <script>
         $(function(){
 
+            FilePond.registerPlugin(FilePondPluginFileValidateSize);
             FilePond.registerPlugin(FilePondPluginFileValidateType);
             // Turn input element into a pond
             $('.my-pond').filepond();
@@ -68,6 +70,7 @@
             $('.my-pond').filepond('allowMultiple', true);
             $('.my-pond').filepond('storeAsFile', true);
             $('.my-pond').filepond('checkValidity', true);
+            $('.my-pond').filepond('maxFileSize', "3MB");
 
         });
     </script>

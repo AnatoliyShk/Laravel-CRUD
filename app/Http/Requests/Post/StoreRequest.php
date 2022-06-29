@@ -18,7 +18,7 @@ class StoreRequest extends FormRequest
             'title' => 'required|min:3|max:255',
             'description' => 'required|min:10',
             'image' => [
-                'required'
+                'required|max:3000'
             ],
         ];
     }

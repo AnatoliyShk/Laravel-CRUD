@@ -18,7 +18,7 @@ class StoreRequest extends FormRequest
             'title' => 'required|min:3|max:255',
             'description' => 'required|min:10',
             'image' => [
-                'required|max:3000'
+                'required|max:10'
             ],
         ];
     }
@@ -27,7 +27,8 @@ class StoreRequest extends FormRequest
         return [
             'title.required' => 'Post title is required',
             'description.required' => 'Post description is required',
-            'image.required' => 'Post image is required'
+            'image.required' => 'Post image is required',
+            'image.uploaded' => 'Post image is too big'
         ];
     }
 }

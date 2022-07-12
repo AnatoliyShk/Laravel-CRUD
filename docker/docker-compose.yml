@@ -1,17 +1,15 @@
 version: '3.8'
 
 services:
-
   webserver:
     image: nginx
     volumes:
       - ../docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ../:/var/www
     ports:
-      - "888:80"
+      - "889:80"
     depends_on:
       - php-fpm
-
   php-fpm:
       container_name: php-fpm
       build:
@@ -27,25 +25,17 @@ services:
       volumes:
           - /var/www/vendor/
           - ./../:/var/www/
-
-  node-watch:
-      image: node:14-alpine
-      tty: true
-      volumes:
-          - ../:/app
-      working_dir: /app
   db:
-      image: mysql:8.0
-      cap_add:
-          - SYS_NICE
+      image: postgres:14.1-alpine
       restart: always
       environment:
-          - MYSQL_DATABASE=blog
-          - MYSQL_ROOT_PASSWORD=root
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=postgres
+          - PGDATA='/tmp'
       ports:
-          - '3306:3306'
+          - '5432:5432'
       volumes:
-          - db:/var/lib/mysql
+          - db:/var/lib/postgresql/data
           - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
 volumes:
     db:
